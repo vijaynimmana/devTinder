@@ -25,6 +25,9 @@ app.get("/bolo", (req,res) => {
 app.get("/userDeatils", (req,res) => {
     res. send ("User Details");
  });
+app.get("/Deatils", (req,res) => {
+    res. send ("Just Details");
+ });
 
 app.listen(7777, () => {
     console.log("listening on port 7777");
