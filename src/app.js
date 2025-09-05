@@ -1,17 +1,36 @@
 const express = require('express');
 const app = express();
 
+
+// 
+
+app.get(/fly$/, (req, res) => {
+    res.send({name:"regex", age:"100"});
+});
+app.get('/abc', (req, res) => {
+    console.log(req.query);
+    res.send({name:"krishna", age:30});
+});
+app.get('/abc/:userId/:password', (req, res) => {
+    console.log(req.params);
+    res.send({name:"vijay", age:30});
+});
+
+app.delete('/abc', (req, res) => {
+    // console.log(req.params);
+    res.send("Deleted sucessfully");
+});
 app.use('/test', (req, res) => {
     res.send("Hello i'm from the Testserver");
 });
 
-app.use('/data', (req, res) => {
-    res.send("Hello i'm from the Dataserver");
-});
+// app.use('/data', (req, res) => {
+//     res.send("Hello i'm from the Dataserver");
+// });
 
-app.use( "/", (req, res) => {
-    res.send("Hello from Empty");
-});
+// app.use( "/", (req, res) => {
+//     res.send("Hello from Empty");
+// });
 
 // app.get("/", (req,res) => {
 //     res. send ("Hello from Vijay!");
