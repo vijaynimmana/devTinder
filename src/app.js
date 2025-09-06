@@ -4,6 +4,21 @@ const app = express();
 
 // 
 
+app.use("/nextCases" , (req, res, next) => {
+   console.log("next case");
+//    res.send("Hello from next series");
+   next();
+},(req, res, next) => {
+    console.log("next case");
+    // res.send("Hello from next 2 series");
+    next();
+},
+(req, res, next) => {
+    console.log("next case");
+    res.send("Hello from next 2 series");
+    // next();÷
+})
+
 app.get(/fly$/, (req, res) => {
     res.send({name:"regex", age:"100"});
 });
