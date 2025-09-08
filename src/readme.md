@@ -25,3 +25,11 @@ this can be hanlded in multiple ways as shown above
 but at the end any response cant be sent when there is no res.send() and it goes to infinite loop
 if there is any next() and it dosent have another RH then it will throw router not found, cannot get /USER. 
 
+
+create a middle for seperate Route handlers.
+what is middleware
+how express js handles the middleware
+create a dummy middle wares 
+create a dummy rh for middle wares.
+create error handling cases
+wild card routes accepting error as a parameter app.use("/", (err, req, res, next)=> {})
