@@ -1,30 +1,41 @@
 const express = require('express');
 const app = express();
-const {AuthData, userData}  = require('./middlewares/auth')
+const connectDB = require('./config/database')
+// const {AuthData, userData}  = require('./middlewares/auth')
 
 
-app.use('/getData/user' , AuthData);
+// app.use('/getData/user' , AuthData);
 
-app.get('/getUsersData',userData, (req, res) => {
-      res.send("From Users Data");
-})
+connectDB().then(() => {
+    console.log("Connection to DB is established");
+    app.listen(7777, () => {
+        console.log("listening on port 7777");
+    });
+ }).catch((err) => {
+     console.error("connection to DB is not established");
+ })
 
-app.get('/DataTest', (req, res, next) => {
-    try{
-        // err = "Data Issue";
-        throw new Error("jdhauud");
-        res.send("Dattata");
-    } catch (err){
-       res.status(401).send("Conatct team");
-    }
+
+// app.get('/getUsersData',userData, (req, res) => {
+//       res.send("From Users Data");
+// })
+
+// app.get('/DataTest', (req, res, next) => {
+//     try{
+//         // err = "Data Issue";
+//         throw new Error("jdhauud");
+//         res.send("Dattata");
+//     } catch (err){
+//        res.status(401).send("Conatct team");
+//     }
     
-})
+// })
 
-app.use('/', (err,req,res,next) => {
-    if(err){
-        res.status(401).send("from the error use");
-    }
-})
+// app.use('/', (err,req,res,next) => {
+//     if(err){
+//         res.status(401).send("from the error use");
+//     }
+// })
 
 
 
@@ -89,6 +100,3 @@ app.use('/', (err,req,res,next) => {
 //     res. send ("Just Details");
 //  });
 
-app.listen(7777, () => {
-    console.log("listening on port 7777");
-});

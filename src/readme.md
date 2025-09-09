@@ -33,3 +33,11 @@ create a dummy middle wares
 create a dummy rh for middle wares.
 create error handling cases
 wild card routes accepting error as a parameter app.use("/", (err, req, res, next)=> {})
+
+
+installed mongoose
+connect to the cluster through connection string
+then created a config file and db.js for configurations
+export them and use them
+write un such a way that the connection string always returns a promise so the sever call should be DOne only after the DB connection.
+
