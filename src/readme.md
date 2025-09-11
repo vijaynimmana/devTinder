@@ -42,6 +42,7 @@ export them and use them
 write in such a way that the connection string always returns a promise so the sever call should be DOne only after the DB connection.
 
 create a user schema, model.
+create the instance of the user model.
 create a post api, add the model
 save the model data to the DB
 always handle adding data to the DB in try and catch
