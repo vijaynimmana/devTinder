@@ -39,5 +39,11 @@ installed mongoose
 connect to the cluster through connection string
 then created a config file and db.js for configurations
 export them and use them
-write un such a way that the connection string always returns a promise so the sever call should be DOne only after the DB connection.
+write in such a way that the connection string always returns a promise so the sever call should be DOne only after the DB connection.
+
+create a user schema, model.
+create a post api, add the model
+save the model data to the DB
+always handle adding data to the DB in try and catch
+check wether the data is stored in the Document it not.
 

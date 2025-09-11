@@ -1,10 +1,33 @@
 const express = require('express');
 const app = express();
 const connectDB = require('./config/database')
+const User = require('./models/users')
 // const {AuthData, userData}  = require('./middlewares/auth')
 
 
 // app.use('/getData/user' , AuthData);
+
+
+app.post('/signUp', async(req, res) => {
+    const user = new User({
+        firstName:"preeti",
+        lastName:"Nimmana",
+        emailID:"preeti@gmail.com",
+        age:27,
+        gender:"female"
+    });
+  try{
+    await user.save();
+    res.status(201).json({
+        message: "Data saved successfully",
+        user: user
+    });
+    // res.send("Data saved Sucessfully");
+  }catch(err){
+    console.log(`${err}: Error found`);
+    res.status(400).send("Not saved sucessfully");
+  }
+})
 
 connectDB().then(() => {
     console.log("Connection to DB is established");
