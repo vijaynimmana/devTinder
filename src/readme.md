@@ -47,7 +47,3 @@ save the model data to the DB
 always handle adding data to the DB in try and catch
 check wether the data is stored in the Document it not.
 
-
-Js Object vs JSON
-add express json middle ware
-make your singup Api dynmaic from the user
