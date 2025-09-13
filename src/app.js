@@ -4,24 +4,22 @@ const connectDB = require('./config/database')
 const User = require('./models/users')
 // const {AuthData, userData}  = require('./middlewares/auth')
 
+app.use(express.json());
+
 
 // app.use('/getData/user' , AuthData);
 
 
 app.post('/signUp', async(req, res) => {
-    const user = new User({
-        firstName:"preeti",
-        lastName:"Nimmana",
-        emailID:"preeti@gmail.com",
-        age:27,
-        gender:"female"
-    });
+    console.log(req.body);
+    const user = new User(req.body);
   try{
     await user.save();
-    res.status(201).json({
-        message: "Data saved successfully",
-        user: user
-    });
+    res.status(200).send("Data Saved sucessfully");
+    // res.status(201).json({
+    //     message: "Data saved successfully",
+    //     user: user
+    // });
     // res.send("Data saved Sucessfully");
   }catch(err){
     console.log(`${err}: Error found`);
