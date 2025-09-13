@@ -48,3 +48,7 @@ save the model data to the DB
 always handle adding data to the DB in try and catch
 check wether the data is stored in the Document it not.
 
+difffernces between js object and JSON
+use of express json() middleware
+saving data in DB dynamically
+
