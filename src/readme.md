@@ -52,3 +52,10 @@ difffernces between js object and JSON
 use of express json() middleware
 saving data in DB dynamically
 
+use another api to get the deatils from DB
+use mongoose find and Findone understand the differnce.
+if used findone what record will be fetched from the document.
+Did all the crud operations using postman, express, mongo (post, patch, get, delete);
+understood, get, post, findOne, findbyIDandupdate, findbyIDandDelete.
+
+

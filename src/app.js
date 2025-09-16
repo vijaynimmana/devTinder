@@ -27,6 +27,60 @@ app.post('/signUp', async(req, res) => {
   }
 })
 
+app.get('/getUserData',async (req, res) => {
+    const userEmail = req.body.emailID;
+    // console.log(req.body);
+    try{
+      const userData = await User.find({emailID : userEmail});
+      console.log(userData[0].emailID);
+      if(userData.length != 0){
+        res.status(200).send(userData);
+      }else {
+        res.send("No such users Found");
+      }
+    }catch(err){
+       res.status(404).send("something went wrong");
+    }
+})
+
+app.get('/getSingleUser' , async(req, res) => {
+    const singleUser = req.body.emailID;
+    try{
+      const singleData = await User.findOne({emailID:singleUser});
+      res.status(200).send(singleData.emailID);
+    }catch(err){
+     res.status(404).send("something went wrong");
+    }
+})
+
+app.patch('/updateUser', async (req, res) => {
+    const userData = req.body.id;
+    console.log(userData);
+    const newData = req.body;
+    try{
+        const updateduser = await User.findByIdAndUpdate(userData, newData, {options:"after"});
+         res.status(200).send(updateduser);
+    }catch(err){
+     res.status(404).send("something Went wrong");
+    }
+})
+
+
+app.delete('/deleteUser', async (req,res) => {
+    const deleteUserByID = req.body.id;
+    console.log(deleteUserByID);
+    const deleted = req.body;
+    try{
+        const deletedData = await User.findByIdAndDelete(deleteUserByID, deleted);
+        res.status(200).send(deletedData);
+    }catch(err){
+        res.status(400).send("something Went Wrong");
+    }
+})
+
+
+
+
 connectDB().then(() => {
     console.log("Connection to DB is established");
     app.listen(7777, () => {
