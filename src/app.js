@@ -57,9 +57,18 @@ app.patch('/updateUser', async (req, res) => {
     const userData = req.body.id;
     console.log(userData);
     const newData = req.body;
-    // console.log();
+    console.log(newData);
     
     try{
+    const AllowedData = ["firstName", "lastName", "age" , "gender", "id", "skills"];
+    const isAllowed = Object.keys(newData).every(k => AllowedData.includes(k));
+    if(!isAllowed){
+        throw new Error("selected Data is not Allowed");
+    }
+    if(newData.skills.length > 4){
+        throw new Error("length  is not Allowed");
+
+    }
     const updateduser = await User.findByIdAndUpdate(userData, newData, { runValidators: true });
     res.status(200).send(updateduser);
     }catch(err){

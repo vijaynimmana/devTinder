@@ -65,3 +65,7 @@ improve the db schema.
 put all approproate validations on the schema.
 add timestamps to the schema
 
+add api level validations in post and patch
+add length validations so that no malicious data is accepted.
+api level data sanitization
+
