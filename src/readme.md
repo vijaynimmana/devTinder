@@ -58,4 +58,10 @@ if used findone what record will be fetched from the document.
 Did all the crud operations using postman, express, mongo (post, patch, get, delete);
 understood, get, post, findOne, findbyIDandupdate, findbyIDandDelete.
 
+schema Validations
+explore schema type options from the documentation.
+add a required, unique, lowercase, uppdercase, min, minlength, maxlength, trim, default,custom validate fucntion for gender.
+improve the db schema.
+put all approproate validations on the schema.
+add timestamps to the schema
 

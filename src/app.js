@@ -57,9 +57,11 @@ app.patch('/updateUser', async (req, res) => {
     const userData = req.body.id;
     console.log(userData);
     const newData = req.body;
+    // console.log();
+    
     try{
-        const updateduser = await User.findByIdAndUpdate(userData, newData, {options:"after"});
-         res.status(200).send(updateduser);
+    const updateduser = await User.findByIdAndUpdate(userData, newData, { runValidators: true });
+    res.status(200).send(updateduser);
     }catch(err){
      res.status(404).send("something Went wrong");
     }
@@ -73,6 +75,17 @@ app.delete('/deleteUser', async (req,res) => {
     try{
         const deletedData = await User.findByIdAndDelete(deleteUserByID, deleted);
         res.status(200).send(deletedData);
+    }catch(err){
+        res.status(400).send("something Went Wrong");
+    }
+})
+app.patch('/updateEmail', async (req,res) => {
+    const userEmail = req.body.id;
+    console.log(userEmail);
+    const userEmailID = req.body.emailID;
+    try{
+        const emailData = await User.findByIdAndUpdate(userEmail, {emailID: userEmailID});
+        res.status(200).send(emailData);
     }catch(err){
         res.status(400).send("something Went Wrong");
     }
