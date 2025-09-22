@@ -60,7 +60,7 @@ app.patch('/updateUser', async (req, res) => {
     console.log(newData);
     
     try{
-    const AllowedData = ["firstName", "lastName", "age" , "gender", "id", "skills"];
+    const AllowedData = ["firstName", "lastName", "age" , "gender", "id", "skills", "photoURL"];
     const isAllowed = Object.keys(newData).every(k => AllowedData.includes(k));
     if(!isAllowed){
         throw new Error("selected Data is not Allowed");

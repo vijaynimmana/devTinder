@@ -29,14 +29,15 @@ const UserSchema = new mongoose.Schema({
         //  }
         // }
     },
-    // photoURL: {
-    //     required: true,
-    //     validate(value){
-    //         if(!validator.isURL(value)){
-    //             throw new Error("not a valid Email");
-    //         }
-    //     }
-    // },
+    photoURL: {
+        type: String,
+        required: true,
+        validate(value){
+         if(!validator.isURL(value)){
+            throw new Error("not a valid Email");
+          }
+        }
+    },
     skills: [],
 }, { timestamps: true }
 )
