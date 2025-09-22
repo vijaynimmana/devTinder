@@ -69,3 +69,6 @@ add api level validations in post and patch
 add length validations so that no malicious data is accepted.
 api level data sanitization
 
+Add validators pacakage
+email, url go through the package.
+
