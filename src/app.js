@@ -2,18 +2,29 @@ const express = require('express');
 const app = express();
 const connectDB = require('./config/database')
 const User = require('./models/users')
+const bcrypt = require('bcrypt');
 // const {AuthData, userData}  = require('./middlewares/auth')
 
 app.use(express.json());
 
-
+const {validateSignupData} = require('./utilis/validation');
 // app.use('/getData/user' , AuthData);
 
 
 app.post('/signUp', async(req, res) => {
     console.log(req.body);
-    const user = new User(req.body);
-  try{
+    try{
+      validateSignupData(req);
+      const {firstName,lastName,emailID,gender} = req.body;
+      const emailHash = await bcrypt.hash(gender, 10);
+
+      const user = new User({
+        firstName,
+        lastName,
+        emailID,
+        gender:emailHash,
+        
+      });
     await user.save();
     res.status(200).send("Data Saved sucessfully");
     // res.status(201).json({
@@ -67,7 +78,6 @@ app.patch('/updateUser', async (req, res) => {
     }
     if(newData.skills.length > 4){
         throw new Error("length  is not Allowed");
-
     }
     const updateduser = await User.findByIdAndUpdate(userData, newData, { runValidators: true });
     res.status(200).send(updateduser);

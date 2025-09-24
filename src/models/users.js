@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     }, lastName: {
-        type: String
+        type: String,
+        required: true
     }, emailID: {
         type: String,
         required: true,
@@ -31,7 +32,8 @@ const UserSchema = new mongoose.Schema({
     },
     photoURL: {
         type: String,
-        required: true,
+        required: false,
+        default:"https://www.istockphoto.com/photo/silent-forest-in-spring-with-beautiful-bright-sun-rays-gm1419410282-465774617",
         validate(value){
          if(!validator.isURL(value)){
             throw new Error("not a valid Email");

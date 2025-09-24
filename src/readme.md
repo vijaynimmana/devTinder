@@ -72,3 +72,5 @@ api level data sanitization
 Add validators pacakage
 email, url go through the package.
 
+install bcrypt and  save the bcrypted paswwword/ anykey in db
+
