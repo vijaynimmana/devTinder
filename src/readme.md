@@ -73,4 +73,7 @@ Add validators pacakage
 email, url go through the package.
 
 install bcrypt and  save the bcrypted paswwword/ anykey in db
+create Login Api, write logic inordert to check email existence
+compare passwords using bcrypt.
+throw common error for invalid cases
 

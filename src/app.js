@@ -110,6 +110,24 @@ app.patch('/updateEmail', async (req,res) => {
     }
 })
 
+app.post('/Login', async(req, res) => {
+    const {emailID, gender} = req.body;
+    try{
+       const userEmail = await User.findOne({emailID:emailID});
+       if(!userEmail){
+        throw new Error("invalid Creds"); 
+       }
+       const comparing = await bcrypt.compare(gender,userEmail.gender);
+       if(comparing){
+        res.send("Login Sucesful");
+       }else{
+        throw new Error("Login failed");
+       }
+    }catch(err){
+       res.status(400).send("err:" + err.message);
+    }
+})
+
 
 
 
