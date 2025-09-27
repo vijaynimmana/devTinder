@@ -5,6 +5,7 @@ const User = require('./models/users')
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken');
+const {userAuth} = require('./middlewares/auth')
 // const {AuthData, userData}  = require('./middlewares/auth')
 
 app.use(express.json());
@@ -122,9 +123,10 @@ app.post('/Login', async(req, res) => {
        }
        const comparing = await bcrypt.compare(gender,userEmail.gender);
        if(comparing){
-        const token = await jwt.sign({emailID:userEmail.emailID}, "DEVTINDDER@9070");
+        const token = await jwt.sign({emailID:userEmail.emailID}, "DEVTINDDER@9070", {expiresIn: "0h"});
         console.log(token);
-        res.cookie("token", token);
+        res.cookie("token", token, {
+            expires: new Date(Date.now() + 1 * 3600000)});
         res.send("Login Sucesful");
        }else{
         throw new Error("Login failed");
@@ -134,18 +136,20 @@ app.post('/Login', async(req, res) => {
     }
 })
 
-app.get("/profile", async(req, res) => {
+app.get("/profile", userAuth, async(req, res) => {
   try{
-    const cookie = req.cookies;
-    console.log(cookie);
+    // const cookie = req.cookies;
+    // console.log(cookie);
     // if(Object.keys(cookie.token).length > 1){
-    const decodedmessage = await jwt.verify(cookie.token, "DEVTINDDER@9070");
-    console.log(decodedmessage.emailID);
-    const {emailID} = decodedmessage;
-    const findUser = await User.find({emailID:emailID});
-    console.log(findUser);
-    if(findUser){
-        res.send(findUser);
+    // const decodedmessage = await jwt.verify(cookie.token, "DEVTINDDER@9070");
+    // console.log(decodedmessage.emailID);
+    // const {emailID} = decodedmessage;
+    // const findUser = await User.find({emailID:emailID});
+    // console.log(req.userData);
+    const {user} = req;
+    // console.log(userData);
+    if(user){
+        res.send(user);
     }else{
         res.status(400).send("user not Found");
     // }
@@ -153,6 +157,15 @@ app.get("/profile", async(req, res) => {
 }catch(err){
     res.status(400).send("cookie not received:" + err);
 }
+})
+
+
+app.post('/sendConnectionRequest', userAuth, async(req,res) => {
+    try{
+        res.send("hello from connection req");
+    }catch(err){
+      res.status(400).send("zError");
+    }
 })
 
 

@@ -1,3 +1,6 @@
+const jwt = require("jsonwebtoken");
+const User = require("../models/users");
+
 const AuthData = (req, res,next) => {
     try{
     req = "test";
@@ -22,4 +25,30 @@ const userData = (req, res, next) => {
      }
 }
 
-module.exports = {AuthData,userData}
+const userAuth = async(req, res, next) => {
+   try{ 
+    const {token} = req.cookies;
+    const userDeatils = await jwt.verify(token, 'DEVTINDDER@9070');
+    // console.log(userDeatils);
+    
+    if(userDeatils){
+        const {emailID} = userDeatils;
+        // console.log(emailID);
+        const user = await User.find({ emailID: emailID });
+        console.log(user);
+        if(user){
+            req.user = user;
+            next();
+        }else {
+            throw new Error("selected Data is not Allowed");
+        }
+    }
+  }catch(err){
+        res.send(err);
+    }
+}
+
+
+
+
+module.exports = {AuthData,userData,userAuth}
