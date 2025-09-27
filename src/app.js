@@ -3,9 +3,12 @@ const app = express();
 const connectDB = require('./config/database')
 const User = require('./models/users')
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken');
 // const {AuthData, userData}  = require('./middlewares/auth')
 
 app.use(express.json());
+app.use(cookieParser());
 
 const {validateSignupData} = require('./utilis/validation');
 // app.use('/getData/user' , AuthData);
@@ -119,6 +122,9 @@ app.post('/Login', async(req, res) => {
        }
        const comparing = await bcrypt.compare(gender,userEmail.gender);
        if(comparing){
+        const token = await jwt.sign({emailID:userEmail.emailID}, "DEVTINDDER@9070");
+        console.log(token);
+        res.cookie("token", token);
         res.send("Login Sucesful");
        }else{
         throw new Error("Login failed");
@@ -126,6 +132,27 @@ app.post('/Login', async(req, res) => {
     }catch(err){
        res.status(400).send("err:" + err.message);
     }
+})
+
+app.get("/profile", async(req, res) => {
+  try{
+    const cookie = req.cookies;
+    console.log(cookie);
+    // if(Object.keys(cookie.token).length > 1){
+    const decodedmessage = await jwt.verify(cookie.token, "DEVTINDDER@9070");
+    console.log(decodedmessage.emailID);
+    const {emailID} = decodedmessage;
+    const findUser = await User.find({emailID:emailID});
+    console.log(findUser);
+    if(findUser){
+        res.send(findUser);
+    }else{
+        res.status(400).send("user not Found");
+    // }
+    }
+}catch(err){
+    res.status(400).send("cookie not received:" + err);
+}
 })
 
 

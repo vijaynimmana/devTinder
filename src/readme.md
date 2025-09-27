@@ -77,3 +77,17 @@ create Login Api, write logic inordert to check email existence
 compare passwords using bcrypt.
 throw common error for invalid cases
 
+
+install cookie parser, 
+just send a dummy cookie to the the user
+creaate a api and then send the cookie back to the user
+jsonwebtoken install
+inside login api after email and pwd validation
+crreate a jwt token and send it back to the user
+read the cookies insid the profile api and find the logged in user.
+
+{
+   "emailID": "vijaynimmana@gmail.com",
+   "gender": "male"
+  
+}
