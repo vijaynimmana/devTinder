@@ -123,8 +123,8 @@ app.post('/Login', async(req, res) => {
        }
        const comparing = await bcrypt.compare(gender,userEmail.gender);
        if(comparing){
-        const token = await jwt.sign({emailID:userEmail.emailID}, "DEVTINDDER@9070", {expiresIn: "0h"});
-        console.log(token);
+        const token = await userEmail.userJWT();
+        // console.log(token);
         res.cookie("token", token, {
             expires: new Date(Date.now() + 1 * 3600000)});
         res.send("Login Sucesful");

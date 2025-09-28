@@ -96,3 +96,9 @@ read the cookies insid the profile api and find the logged in user.
 write the user auth middle ware
 add middlewware in profile api and a new sendConnectionreq api
 test the expiry of jwt and cookies to 7 days.
+
+
+create user schema to jwt
+create same for validationpassword, bcrypt
+this req object in schema is treatesd as this.
+no arrow fn should be used.
